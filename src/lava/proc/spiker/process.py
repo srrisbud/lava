@@ -36,5 +36,5 @@ class Spiker(AbstractProcess):
         super().__init__(shape=shape, name=name, log_config=log_config)
         self.s_out = OutPort(shape=shape)
         self.rate = Var(shape=shape, init=period)
-        self.counter = Var(shape=shape, init=np.zeros(shape).astype(int))
+        self.counter = Var(shape=shape, init=np.ones(shape).astype(int))
         self.payload = Var(shape=shape, init=payload)

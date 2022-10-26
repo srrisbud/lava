@@ -14,17 +14,17 @@ class TestSpikerModels(unittest.TestCase):
     """Tests spiker PyProcModel."""
 
     def test_single_spiker_counter(self):
-        "Tests a single spiker for multiple time steps."
-        spiker = Spiker(shape=(1,), period=5)
+        """Tests a single spiker for multiple time steps."""
+        spiker = Spiker(shape=(1,), period=5, payload=-4)
         counter = []
         for timestep in range(20):
             spiker.run(condition=RunSteps(num_steps=1),
                        run_cfg=Loihi2SimCfg())
             counter.append(spiker.counter.get()[0])
         spiker.stop()
-        expected = np.asarray([1.0, 2.0, 3.0, 4.0, 5.0, 1.0, 2.0, 3.0, 4.0,
-                               5.0, 1.0, 2.0, 3.0, 4.0, 5.0, 1.0, 2.0, 3.0,
-                               4.0, 5.0])
+        expected = np.asarray([2.0, 3.0, 4.0, 5.0, 1.0, 2.0, 3.0, 4.0, 5.0,
+                               1.0, 2.0, 3.0, 4.0, 5.0, 1.0, 2.0, 3.0, 4.0,
+                               5.0, 1.0])
         self.assertTrue(np.all(counter == expected))
 
     def test_multiple_spikers_counter(self):
@@ -37,8 +37,8 @@ class TestSpikerModels(unittest.TestCase):
             counter1.append(spiker.counter.get()[0])
             counter2.append(spiker.counter.get()[1])
         spiker.stop()
-        expected = np.asarray([1.0, 2.0, 3.0, 4.0, 5.0, 1.0, 2.0, 3.0, 4.0,
-                               5.0, 1.0, 2.0, 3.0, 4.0, 5.0, 1.0, 2.0, 3.0,
-                               4.0, 5.0])
+        expected = np.asarray([2.0, 3.0, 4.0, 5.0, 1.0, 2.0, 3.0, 4.0, 5.0,
+                               1.0, 2.0, 3.0, 4.0, 5.0, 1.0, 2.0, 3.0, 4.0,
+                               5.0, 1.0])
         self.assertTrue(np.all(counter1 == expected))
         self.assertTrue(np.all(counter2 == expected))
