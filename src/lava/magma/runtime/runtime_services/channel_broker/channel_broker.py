@@ -191,7 +191,7 @@ class ChannelBroker(AbstractChannelBroker):
                        c_builder_idx: int) -> ty.List[Channel]:
         channels: ty.List[Channel] = []
         MESSAGE_SIZE_IN_C = 128 * 4
-        DEFAULT_CHANNEL_SLACK = 16
+        DEFAULT_CHANNEL_SLACK = 8  # 16
         channel_slack = self._compile_config.get("channel_slack",
                                                  DEFAULT_CHANNEL_SLACK)
         if input_channel:
